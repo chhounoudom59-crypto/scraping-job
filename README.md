@@ -1,56 +1,188 @@
-﻿# scraping-job
+# 🕷️ scraping-job
 
-# scraping-job
+A collection of web scrapers for Cambodia job sites.
+This repository contains multiple scrapers that collect job listings and (where available) detailed job information, then export the results to CSV files.
 
-A collection of web scrapers for Cambodia job sites.  
-This repository contains multiple scrapers that collect job listings and (where available) job detail data and export them to CSV.
+---
 
-## Project Structure
+## 📂 Project Structure
 
-- [Jobify/](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/Jobify:0:0-0:0)
-  - Scraper for https://jobify.works (Nuxt site; scraped using Selenium)
-  - Outputs:
-    - [jobify_jobs_list.csv](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/Jobify/jobify_jobs_list.csv:0:0-0:0)
-    - [jobify_jobs_detail.csv](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/Jobify/jobify_jobs_detail.csv:0:0-0:0)
+```
+scraping-job/
+│
+├── Jobify/
+│   ├── jobify_scraper.py
+│   ├── requirements.txt
+│   ├── jobify_jobs_list.csv
+│   └── jobify_jobs_detail.csv
+│
+├── BongThom/
+│   ├── bongthom_scraper.py
+│   ├── bongthom_jobs_list.csv
+│   └── bongthom_jobs_details.csv
+│
+├── chmhr/   # CamHR
+│   ├── camhr_scraper.py
+│   ├── camhr_jobs_list.csv
+│   └── camhr_jobs_details.csv
+│
+└── README.md
+```
 
-- [BongThom/](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/BongThom:0:0-0:0)
-  - Scraper for https://www.bongthom.com
-  - Outputs:
-    - [bongthom_jobs_list.csv](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/BongThom/bongthom_jobs_list.csv:0:0-0:0)
-    - [bongthom_jobs_details.csv](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/BongThom/bongthom_jobs_details.csv:0:0-0:0)
+### 🧩 Included Scrapers
 
-- [chmhr/](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/chmhr:0:0-0:0) (CamHR)
-  - Scraper for https://www.camhr.com
-  - Outputs:
-    - [camhr_jobs_list.csv](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/chmhr/camhr_jobs_list.csv:0:0-0:0)
-    - [camhr_jobs_details.csv](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/chmhr/camhr_jobs_details.csv:0:0-0:0)
+#### 🟦 1. Jobify
 
-## Requirements
+* Website: [https://jobify.works](https://jobify.works)
+* Tech stack: **Selenium** (Nuxt / dynamic site)
+* Data collected:
 
-- Python 3.10+ (recommended)
-- Google Chrome installed (for Selenium scrapers)
-- Internet connection
+  * Job list data
+  * Job detail data
+* Output files:
 
-### Python packages
+  * `jobify_jobs_list.csv`
+  * `jobify_jobs_detail.csv`
 
-This repo uses:
-- `requests`
-- `beautifulsoup4`
-- `selenium`
-- `webdriver-manager`
-- `fake-useragent` (optional)
+#### 🟩 2. BongThom
 
-Jobify has its own [requirements.txt](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/Jobify/requirements.txt:0:0-0:0) at:
+* Website: [https://www.bongthom.com](https://www.bongthom.com)
+* Tech stack: **Requests + BeautifulSoup + Selenium**
+* Data collected:
 
-- [Jobify/requirements.txt](cci:7://file:///c:/Users/ROG%20Zephyrus%20G15/Desktop/scraping/Final_Project/Jobify/requirements.txt:0:0-0:0)
+  * Job list data
+  * Job detail data
+* Output files:
 
-BongThom and CamHR scripts also use Selenium and BeautifulSoup.
+  * `bongthom_jobs_list.csv`
+  * `bongthom_jobs_details.csv`
 
-## Setup (Windows)
+#### 🟨 3. CamHR (chmhr)
 
-From repo root:
+* Website: [https://www.camhr.com](https://www.camhr.com)
+* Tech stack: **Selenium + BeautifulSoup**
+* Data collected:
+
+  * Job list data
+  * Job detail data
+* Output files:
+
+  * `camhr_jobs_list.csv`
+  * `camhr_jobs_details.csv`
+
+---
+
+## ⚙️ Requirements
+
+* Python **3.10+** (recommended)
+* Google Chrome (required for Selenium scrapers)
+* Stable internet connection
+
+### 📦 Python Packages
+
+Common dependencies used in this repository:
+
+* `requests`
+* `beautifulsoup4`
+* `selenium`
+* `webdriver-manager`
+* `fake-useragent` (optional)
+
+> **Note:** The Jobify scraper has its own dependency file:
+>
+> `Jobify/requirements.txt`
+
+---
+
+## 🪟 Setup (Windows)
+
+From the repository root directory:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install -U pip
+```
+
+Install common dependencies:
+
+```powershell
+pip install requests beautifulsoup4 selenium webdriver-manager fake-useragent
+```
+
+For **Jobify only**, install its specific requirements:
+
+```powershell
+cd Jobify
+pip install -r requirements.txt
+cd ..
+```
+
+---
+
+## ▶️ Usage
+
+Run each scraper from its own folder.
+
+### Jobify
+
+```powershell
+cd Jobify
+python jobify_scraper.py
+```
+
+### BongThom
+
+```powershell
+cd BongThom
+python bongthom_scraper.py
+```
+
+### CamHR
+
+```powershell
+cd chmhr
+python camhr_scraper.py
+```
+
+After execution, CSV files will be generated in the same folder as the scraper.
+
+---
+
+## 📊 Output Format
+
+Each CSV typically contains fields such as:
+
+* Job title
+* Company name
+* Location
+* Salary (if available)
+* Job type
+* Posted date
+* Job description (detail scraper)
+* Job URL
+
+The exact columns may vary depending on the source website.
+
+---
+
+## 📝 Notes
+
+* Selenium scrapers may take longer due to browser automation.
+* Website structure changes may break scrapers.
+* Use responsibly and respect each website’s **robots.txt** and **terms of service**.
+
+---
+
+## ⚠️ Disclaimer
+
+This project is for **educational and research purposes only**.
+The author is not responsible for misuse of the scraped data.
+
+---
+
+## 👤 Author
+
+**CHHOUN Oudom**
+
+GitHub: [https://github.com/chhounoudom59-crypto](https://github.com/chhounoudom59-crypto)
